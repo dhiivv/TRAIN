@@ -1,0 +1,173 @@
+index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Railway Collision Avoidance System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#train-status">Train Status</a></li>
+                <li><a href="#section-status">Section Status</a></li>
+                <li><a href="#alerts">Alerts</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard">
+        <h2>Dashboard</h2>
+        <div id="dashboard-data">
+            <!-- Dashboard data will be populated here -->
+        </div>
+    </section>
+
+    <!-- Train Status Section -->
+    <section id="train-status">
+        <h2>Train Status</h2>
+        <table id="train-status-table">
+            <thead>
+                <tr>
+                    <th>Train ID</th>
+                    <th>Location</th>
+                    <th>Speed</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="train-status-data">
+                <!-- Train status data will be populated here -->
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Section Status Section -->
+    <section id="section-status">
+        <h2>Section Status</h2>
+        <table id="section-status-table">
+            <thead>
+                <tr>
+                    <th>Section ID</th>
+                    <th>Status</th>
+                    <th>Occupancy</th>
+                </tr>
+            </thead>
+            <tbody id="section-status-data">
+                <!-- Section status data will be populated here -->
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Alerts Section -->
+    <section id="alerts">
+        <h2>Alerts</h2>
+        <ul id="alerts-list">
+            <!-- Alerts will be populated here -->
+        </ul>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+styles.css
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav li {
+    margin-right: 20px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+section {
+    padding: 1em;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f0f0f0;
+}
+
+
+script.js
+
+// Fetch data from API and populate dashboard, train status, section status, and alerts sections
+fetch('/api/data')
+    .then(response => response.json())
+    .then(data => {
+        // Populate dashboard data
+        const dashboardData = document.getElementById('dashboard-data');
+        dashboardData.innerHTML = `
+            <p>Trains: ${data.trains.length}</p>
+            <p>Sections: ${data.sections.length}</p>
+            <p>Alerts: ${data.alerts.length}</p>
+        `;
+
+        // Populate train status table
+        const trainStatusTable = document.getElementById('train-status-table');
+        const trainStatusData = document.getElementById('train-status-data');
+        trainStatusData.innerHTML = '';
+        data.trains.forEach(train => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${train.trainId}</td>
+                <td>${train.location}</td>
+                <td>${train.speed}</td>
+                <td>${train.status}</td>
+            `;
+            trainStatusData.appendChild(row);
+        });
+
+        // Populate section status table
+        const sectionStatusTable = document.getElementById('section-status-table');
+        const sectionStatusData = document.getElementById('section-status-data');
+        sectionStatusData.innerHTML = '';
+        data.sections.forEach(section => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${section.sectionId}</td>
+                <td
