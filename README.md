@@ -9,7 +9,7 @@ class Train(EmbeddedDocument):
     status = StringField(required=True)
 
 
-(link unavailable)
+
 
 from mongoengine import *
 
@@ -19,7 +19,7 @@ class Section(EmbeddedDocument):
     occupancy = BooleanField(required=True)
 
 
-(link unavailable)
+
 
 from mongoengine import *
 
@@ -29,7 +29,6 @@ class Alert(EmbeddedDocument):
     location = StringField(required=True)
 
 
-(link unavailable)
 
 from flask import Blueprint, request, jsonify
 from train_model import Train
@@ -59,7 +58,7 @@ def update_train(train_id):
     return jsonify(train.to_json())
 
 
-(link unavailable)
+
 
 from flask import Blueprint, request, jsonify
 from section_model import Section
@@ -89,7 +88,7 @@ def update_section(section_id):
     return jsonify(section.to_json())
 
 
-(link unavailable)
+
 
 from flask import Blueprint, request, jsonify
 from alert_model import Alert
@@ -119,7 +118,7 @@ def update_alert(alert_id):
     return jsonify(alert.to_json())
 
 
-(link unavailable)
+
 
 from flask import Flask
 from train_controller import train_blueprint
